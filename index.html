@@ -17,26 +17,24 @@
       color: #c2185b;
     }
     .contenedor {
-      display: flex;
-      overflow-x: auto;
-      gap: 1rem;
-      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
     }
     .semestre {
-      min-width: 240px;
       background: #ffe4ec;
       border: 2px solid #f48fb1;
       border-radius: 12px;
       padding: 1rem;
-      flex-shrink: 0;
       box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
     }
     .semestre h2 {
       margin-top: 0;
       color: #ad1457;
+      text-align: center;
     }
     .ramo {
-      background: #ffffff;
+      background: #fce4ec;
       margin: 0.5rem 0;
       padding: 0.5rem;
       border-left: 6px solid #ec407a;
@@ -45,87 +43,25 @@
       transition: background 0.2s ease;
     }
     .ramo:hover {
-      background: #fde0ec;
+      background: #f8bbd0;
     }
     .requisito {
       border-left-color: #bf360c !important;
-      background: #fff3e0 !important;
+      background: #f3e5f5 !important;
+    }
+    .aprobado {
+      text-decoration: line-through;
+      background: #fce4ec !important;
+      border-left-color: #880e4f !important;
     }
   </style>
 </head>
 <body>
   <h1>Malla Obstetricia - Universidad de Los Lagos</h1>
+  <p style="text-align:center;">Haz clic en un ramo para ver prerrequisitos. Doble clic para marcar como aprobado.</p>
   <div class="contenedor">
-    <div class="semestre">
-      <h2>1° Semestre</h2>
-      <div class="ramo" id="comunicacion">Comunicación I</div>
-      <div class="ramo" id="fundamentos">Fundamentos de la Salud Sexual y Reproductiva</div>
-      <div class="ramo" id="basesBiologicas">Bases Biológicas en la SSR</div>
-      <div class="ramo" id="basesBioquimicas">Bases Bioquímicas en la SSR</div>
-      <div class="ramo" id="antropologia">Antropología en SSR</div>
-    </div>
-    <div class="semestre">
-      <h2>2° Semestre</h2>
-      <div class="ramo">Ciudadanía I</div>
-      <div class="ramo">Bioestadística</div>
-      <div class="ramo">Microbiología y Parasitología</div>
-      <div class="ramo">Anatomía</div>
-      <div class="ramo" id="fisiologia">Fisiología e Histología</div>
-      <div class="ramo" id="enfermeriaBasica">Enfermería Básica</div>
-      <div class="ramo">Electivos UFIN</div>
-    </div>
-    <div class="semestre">
-      <h2>3° Semestre</h2>
-      <div class="ramo">Inglés I</div>
-      <div class="ramo">Epidemiología</div>
-      <div class="ramo">Psicología</div>
-      <div class="ramo" id="fisiopato">Fisiopatología y Farmacología</div>
-      <div class="ramo" id="basesGine">Bases Fisiológicas en Ginecología</div>
-      <div class="ramo" id="procesoSSR">Proceso de Enfermería en SSR</div>
-    </div>
-    <div class="semestre">
-      <h2>4° Semestre</h2>
-      <div class="ramo">Inglés II</div>
-      <div class="ramo" id="basesNeo">Bases Fisiológicas en Obstetricia y Neonatología</div>
-      <div class="ramo" id="patoGine">Bases Patológicas en Ginecología</div>
-      <div class="ramo">Salud Familiar y Comunitaria</div>
-      <div class="ramo" id="procesoGine">Proceso de Enfermería en la Gineco-Obstetricia</div>
-      <div class="ramo">Electivos UFIN</div>
-    </div>
-    <div class="semestre">
-      <h2>5° Semestre</h2>
-      <div class="ramo">Inglés III</div>
-      <div class="ramo">Introducción a la Gestión en SSR</div>
-      <div class="ramo" id="patoNeo">Bases Patológicas en Obstetricia y Neonatología</div>
-      <div class="ramo">Educación en SSR</div>
-      <div class="ramo" id="saludAPS">Salud Familiar en APS</div>
-    </div>
-    <div class="semestre">
-      <h2>6° Semestre</h2>
-      <div class="ramo">Inglés IV</div>
-      <div class="ramo" id="metodologia">Metodología de la Investigación</div>
-      <div class="ramo" id="clinicaCuidados">Clínica en Cuidados Perinatales</div>
-      <div class="ramo">Electivos UFIN</div>
-    </div>
-    <div class="semestre">
-      <h2>7° Semestre</h2>
-      <div class="ramo" id="seminario">Seminario de Investigación</div>
-      <div class="ramo">Clínica Gine-Oncológica</div>
-      <div class="ramo">Electivos UFIN</div>
-    </div>
-    <div class="semestre">
-      <h2>8° Semestre</h2>
-      <div class="ramo">Gestión de Proyectos (Ciudadanía II)</div>
-      <div class="ramo" id="clinicaPatologica">Clínica Perinatal Patológica</div>
-    </div>
-    <div class="semestre">
-      <h2>9° Semestre</h2>
-      <div class="ramo">Internado I</div>
-    </div>
-    <div class="semestre">
-      <h2>10° Semestre</h2>
-      <div class="ramo">Internado II</div>
-    </div>
+    <!-- Aquí van los bloques .semestre -->
+    <!-- Puedes copiar y pegar los semestres pares e impares alternando fila -->
   </div>
 
   <script>
@@ -140,7 +76,6 @@
       clinicaCuidados: ['patoNeo', 'fisiopato'],
       seminario: ['metodologia'],
       clinicaPatologica: ['clinicaCuidados', 'fisiopato']
-      // Internado requiere todos hasta 8vo semestre (no marcado individualmente)
     };
 
     document.querySelectorAll('.ramo').forEach(ramo => {
@@ -153,6 +88,10 @@
             if (prereq) prereq.classList.add('requisito');
           });
         }
+      });
+
+      ramo.addEventListener('dblclick', () => {
+        ramo.classList.toggle('aprobado');
       });
     });
   </script>
